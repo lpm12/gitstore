@@ -37,7 +37,13 @@
       <el-table-column prop="courseHour" label="课时"></el-table-column>
       <el-table-column prop="coursePrice" label="价格"></el-table-column>
       <el-table-column prop="teacherName" label="授课教师"></el-table-column>
-      <el-table-column label="操作" align="center" width="290">
+      <el-table-column prop="startTime" label="课程开始时间" :formatter="formatStartTime" width="160"></el-table-column>
+      <el-table-column label="报名情况" align="center">
+         <template #default="{ row }">
+           {{ row.registerNumber }} / {{ row.maxNumber }}
+         </template>
+      </el-table-column>
+      <el-table-column label="操作" align="center" width="200">
         <template #default="scope">
           <el-button
             v-permission="['sys:courseList:edit']"
@@ -89,6 +95,11 @@ import AddCourse from "./AddCourse.vue";
 import { Plus, Edit, Delete, Search, Close } from "@element-plus/icons-vue";
 import useTable from "../../composables/course/useTable";
 import useCourse from "../../composables/course/useCourse";
+const formatStartTime = (row: { startTime: string }) => {
+  const startTime = row.startTime; 
+  const formattedStartTime = new Date(startTime).toLocaleString('zh-CN', { timeZone: 'UTC' }); // 根据需要调整时区
+  return formattedStartTime;
+};
 //列表
 const {
   listParm,
@@ -102,7 +113,7 @@ const {
   reFresh,
 } = useTable();
 //新增、编辑
-const { addBtn, editBtn, deleteBtn, addRef,joinBtn } = useCourse(getList);
+const { addBtn, editBtn, deleteBtn, addRef, joinBtn} = useCourse(getList);
 </script>
 
 <style scoped></style>

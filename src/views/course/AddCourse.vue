@@ -53,6 +53,45 @@
             </el-form-item>
           </el-col>
         </el-row>
+        <el-row>
+          <!-- <el-col :span="12" :offset="0">
+            <el-form-item prop="startTime" label="课程开始时间">
+              <el-input v-model="addModel.startTime"></el-input>
+            </el-form-item>
+          </el-col> -->
+          <el-form-item prop="startTime" label="课程开始时间">
+            <el-col :span="11">
+              <el-date-picker
+                v-model="addModel.startTime"
+                type="date"
+                placeholder="课程开始日期"
+                style="width: 100%"
+              />
+            </el-col>
+            <el-col :span="2" class="text-center">
+              <span class="text-gray-500">-</span>
+            </el-col>
+            <el-col :span="11">
+              <el-time-picker
+                v-model="addModel.startTime"
+                placeholder="课程开始时间"
+                style="width: 100%"
+              />
+            </el-col>
+          </el-form-item>
+        </el-row>
+        <el-row>
+          <el-col :span="12" :offset="0">
+            <el-form-item prop="maxNumber" label="报名上限">
+              <el-input v-model="addModel.maxNumber"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12" :offset="0">
+            <el-form-item prop="courseTime" label="课程时长">
+              <el-input v-model="addModel.courseTime"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
         <el-form-item prop="image" label="课程图片">
           <el-upload
             ref="uploadRef"
@@ -228,6 +267,10 @@ const addModel = reactive<CourseType>({
   courseHour: 0,
   courseDetails: "",
   coursePrice: 0,
+  startTime: "",
+  courseTime: 0,
+  maxNumber: 0,
+  registerNumber: 0
 });
 const validateCourseHour = (rule: any, value: any, callback: any) => {
   if (value === 0 || value < 0) {
@@ -239,6 +282,20 @@ const validateCourseHour = (rule: any, value: any, callback: any) => {
 const validateCoursePrice = (rule: any, value: any, callback: any) => {
   if (value === 0 || value < 0) {
     callback(new Error("请填写课程价格"));
+  } else {
+    callback();
+  }
+};
+const validateCourseTime = (rule: any, value: any, callback: any) => {
+  if (value === 0 || value < 0) {
+    callback(new Error("请填写课程时长"));
+  } else {
+    callback();
+  }
+};
+const validateMaxNumber = (rule: any, value: any, callback: any) => {
+  if (value === 0 || value < 0) {
+    callback(new Error("请填写最大报名数"));
   } else {
     callback();
   }
@@ -271,6 +328,27 @@ const rules = reactive({
       required: true,
       trigger: "blur",
       message: "请填写课程详情",
+    },
+  ],
+  startTime: [
+    {
+      required: true,
+      trigger: "blur",
+      message: "请填写课程开始时间",
+    },
+  ],
+  courseTime: [
+    {
+      required: true,
+      validator: validateCourseTime,
+      trigger: "blur",
+    },
+  ],
+  maxNumber: [
+    {
+      required: true,
+      validator: validateMaxNumber,
+      trigger: "blur",
     },
   ],
   coursePrice: [

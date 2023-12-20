@@ -2,7 +2,7 @@ import { CourseType } from "@/api/course/CourseModel"
 import { EditType } from "@/type/BaseEnum"
 import { FuncList } from "@/type/BaseType"
 import { ref } from "vue"
-import { deleteApi,joinCourseApi } from "@/api/course"
+import { deleteApi,joinCourseApi, quitCourseApi } from "@/api/course"
 import useInstance from "@/hooks/useInstance"
 import { ElMessage } from "element-plus"
 import { userStore } from "@/store/user"
@@ -44,11 +44,26 @@ export default function useCourse(getList: FuncList) {
             }
         }
     }
+    //退课
+    const quitBtn = async(row: CourseType)=>{
+        //信息确定
+        let confirm =  await global.$myconfirm('确定退课该课程吗?')
+        if(confirm){
+            let res = await quitCourseApi({
+                courseId:row.courseId,
+                memberId:store.getUserId
+            })
+            if(res && res.code == 200){
+                ElMessage.success(res.msg)
+            }
+        }
+    }
     return {
         addBtn,
         editBtn,
         deleteBtn,
         addRef,
-        joinBtn
+        joinBtn,
+        quitBtn
     }
 }

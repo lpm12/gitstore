@@ -14,8 +14,10 @@
       <el-table-column prop="courseHour" label="课时"></el-table-column>
       <el-table-column prop="coursePrice" label="价格"></el-table-column>
       <el-table-column prop="teacherName" label="授课教师"></el-table-column>
+      <el-table-column prop="startTime" label="课程开始时间" :formatter="formatStartTime" width="160"></el-table-column>
+      
       <el-table-column
-        v-if="global.$checkPermission(['sys:mycourse:export'])"
+        v-if="global.$checkPermission(['sys:mycourse:export', 'sys:mycourse:quit'])"
         label="操作"
         align="center"
         width="290"
@@ -28,6 +30,14 @@
             size="default"
             @click="exportBtn(scope.row)"
             >导出学生</el-button
+          >
+          <el-button
+            @click="quitBtn(scope.row)"
+            v-permission="['sys:mycourse:quit']"
+            type="success"
+            :icon="Edit"
+            size="default"
+            >退课</el-button
           >
         </template>
       </el-table-column>
@@ -53,11 +63,19 @@ import { Edit } from "@element-plus/icons-vue";
 import useMyCourseTable from "../../composables/mycourse/useMyCourseTable";
 import {  CourseType } from "@/api/course/CourseModel";
 import useInstance from "@/hooks/useInstance";
+import useCourse from "../../composables/course/useCourse";
+const formatStartTime = (row: { startTime: string }) => {
+  const startTime = row.startTime; 
+  const formattedStartTime = new Date(startTime).toLocaleString('zh-CN', { timeZone: 'UTC' }); // 根据需要调整时区
+  return formattedStartTime;
+};
 const store  = userStore()
 const { global } = useInstance();
 //列表
-const { listParm, tableDate, sizeChange, currentChange, tableHeight } =
+const { listParm, tableDate, sizeChange, currentChange, tableHeight, getList} =
   useMyCourseTable();
+//退课
+const {quitBtn} = useCourse(getList);
 //导出
 const exportBtn = (row: CourseType) => {
   const abtn = document.createElement("a");

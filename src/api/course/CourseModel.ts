@@ -16,14 +16,22 @@ export type CourseType = {
     teacherName:string,
     courseHour:number,
     courseDetails:string,
-    coursePrice:number
+    coursePrice:number,
+    startTime:string,
+    courseTime:number,
+    maxNumber:number,
+    registerNumber:number
 }
 //选课参数类型
 export type SelectCoure = {
     courseId:string,
     memberId:string
 }
-
+//退课参数类型
+export type QuitCoure = {
+    courseId:string,
+    memberId:string
+}
 export type MyCourseListParm = {
     userType:string,
     userId:string,

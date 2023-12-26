@@ -25,13 +25,13 @@ import Tabs from './tabs/Tabs.vue';
   height: 100%;
   .asside {
     // background-color: blueviolet;
-    background-color: #304156;
+    background-color: #FF8342;
   }
   .header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #009688;
+    background-color: #19CAAD;
   }
   .main {
     padding-top: 1px;

@@ -59,7 +59,7 @@ const onConfirm = () => {
     margin-right: 0px;
     border-top-left-radius: 7px !important;
     border-top-right-radius: 7px !important;
-    background-color: #009688 !important;
+    background-color: #19CAAD !important;
     .el-dialog__title {
       color: #fff;
       font-size: 16px;

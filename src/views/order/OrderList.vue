@@ -177,7 +177,7 @@
                 font-size: 17px;
                 font-weight: 600;
                 padding-left: 50px;
-                color: #009688;
+                color: #19CAAD;
               "
               >合计:</span
             >{{ totalPrice }}
@@ -269,7 +269,7 @@ const commit = async () => {
     font-size: 16px;
     padding: 12.5px;
     margin-bottom: 0px !important;
-    background-color: #009688 !important;
+    background-color: #19CAAD !important;
     .el-drawer__close {
       color: #fff !important;
     }
@@ -291,7 +291,7 @@ const commit = async () => {
     font-size: 16px;
     padding: 12.5px;
     margin-bottom: 0px !important;
-    background-color: #009688 !important;
+    background-color: #19CAAD !important;
     .el-drawer__close {
       color: #fff !important;
     }

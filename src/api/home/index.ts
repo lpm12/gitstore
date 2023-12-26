@@ -8,6 +8,10 @@ export const getTotalApi = ()=>{
 export const getSuggestListApi = ()=>{
     return http.get("/api/home/getSuggestList")
 }
+//近期收益
+export const getRecentIncomeApi = ()=>{
+    return http.get("/api/home/getRecentIncome")
+}
 //热销商品
 export const getHotGoodstApi = ()=>{
     return http.get("/api/home/getHotGoods")

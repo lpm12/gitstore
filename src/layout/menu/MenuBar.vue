@@ -5,7 +5,7 @@
     :default-active="activeIndex"
     class="el-menu-vertical-demo"
     unique-opened
-    background-color="#304156"
+    background-color="#FF8342"
     router
   >
     <menu-item :menuList="menuList"></menu-item>
@@ -283,16 +283,16 @@ const menuList = computed(()=>{
 /* 菜单点中文字的颜色 */
 
 :deep(.el-menu-item.is-active) {
-  color: #409eff !important;
+  color: #FEDB01 !important;
 }
 /* 当前打开菜单的所有子菜单颜色 */
 
 :deep(.is-opened .el-menu-item) {
-  background-color: #1f2d3d !important;
+  background-color: #FF6F55 !important;
 }
 /* 鼠标移动菜单的颜色 */
 
 :deep(.el-menu-item:hover) {
-  background-color: #001528 !important;
+  background-color: #FE9930 !important;
 }
 </style>

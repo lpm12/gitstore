@@ -8,36 +8,36 @@
       justify="center"
       style="margin-bottom: 80px"
     >
-      <el-col :span="6">
+      <el-col :span="8">
         <div class="show-header" style="background: rgb(45, 183, 245)">
           <div class="show-num">{{ total.memberCount }}</div>
           <div class="bottom-text">会员总数</div>
         </div>
       </el-col>
-      <el-col :span="6">
+      <el-col :span="8">
         <div class="show-header" style="background: rgb(237, 64, 20)">
           <div class="show-num">{{ total.userCount }}</div>
           <div class="bottom-text">员工总数</div>
         </div>
       </el-col>
-      <el-col :span="6">
-        <div class="show-header">
+      <el-col :span="8">
+        <div class="show-header" style="background: rgb(255, 153, 0)">
           <div class="show-num">{{ total.materCount }}</div>
-          <div class="bottom-text">器材总数</div>
+          <div class="bottom-text">器材种类</div>
         </div>
       </el-col>
-      <el-col :span="6">
+      <!-- <el-col :span="6">
         <div class="show-header" style="background: rgb(255, 153, 0)">
           <div class="show-num">{{ total.orderCount }}</div>
           <div class="bottom-text">昨日订单</div>
         </div>
-      </el-col>
+      </el-col> -->
     </el-row>
     <div style="display: flex">
       <el-card style="flex: 1">
         <template #header>
           <div class="card-header">
-            <span>热销商品</span>
+            <span>近期收益</span>
           </div>
         </template>
         <div ref="myChart" :style="{ width: '400px', height: '250px' }"></div>
@@ -81,7 +81,7 @@
 </template>
 
 <script setup lang="ts">
-import { getTotalApi, getSuggestListApi,getHotCardstApi,getHotCourseApi,getHotGoodstApi } from "@/api/home";
+import { getTotalApi, getSuggestListApi,getHotCardstApi,getHotCourseApi,getHotGoodstApi,getRecentIncomeApi } from "@/api/home";
 import { onMounted, reactive, nextTick, ref } from "vue";
 import useInstance from "@/hooks/useInstance";
 const { global } = useInstance();
@@ -113,7 +113,8 @@ const charts1 = async() => {
     ],
   });
   //获取数据
-  const res = await getHotGoodstApi()
+  // const res = await getHotGoodstApi()
+  const res = await getRecentIncomeApi()
   if(res && res.code == 200){
     console.log(res.data)
     option.xAxis.data = res.data.names
